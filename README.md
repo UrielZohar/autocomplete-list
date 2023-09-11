@@ -1,3 +1,9 @@
+# In This Home Assignment We Have
+
+✅ Autocomplete with fetching items from an API
+
+✅ Debouncer for the input change
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
