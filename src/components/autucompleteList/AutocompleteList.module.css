@@ -2,8 +2,13 @@
 
 .autocompleteList {
   --shadow-color: #ccc;
+  --disabled-color: #eee;
   display: flex;
   flex-direction: column;
+
+  &.loading {
+    background-color: var(--disabled-color);
+  }
 }
 
 .autocompleteListInputSection {
@@ -21,6 +26,10 @@
 
 .autocompleteListClearIcon {
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--shadow-color);
+  }
 }
 
 .autocompleteListSearchIcon {
@@ -33,4 +42,8 @@
   padding: 10px;
   box-sizing: border-box;
   border: none;
+
+  &:disabled {
+    background-color: var(--disabled-color);
+  }
 }

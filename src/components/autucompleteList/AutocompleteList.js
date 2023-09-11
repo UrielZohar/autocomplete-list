@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { SuggestionsList } from './components/suggestionsList/SuggestionsList.js';
-import { displayItem as displayItemDefault, handleKeyPress as handleKeyPressUtils } from './AutocompleteList.utils.js';
+import { displayItem as displayItemDefault } from './AutocompleteList.utils.js';
 import styles from './AutocompleteList.module.css';
 
 const AutocompleteList = ({ items, displayItem = displayItemDefault, onChange, loading, value, onSelect }) => {
@@ -24,28 +24,33 @@ const AutocompleteList = ({ items, displayItem = displayItemDefault, onChange, l
     setIsShowSuggestionsList(false);
   };
 
-  const onEsc = () => { 
+  const onClear = () => { 
     setIsShowSuggestionsList(false);
+    onChange('');
+    onSelect(null);
   };
+
   return (
-    <div className={styles.autocompleteList}>
+    <div className={`${styles.autocompleteList} ${loading ? 'loading' : ''}`}>
       <div className={styles.autocompleteListInputSection}>
         <div className={styles.autocompleteListSearchIcon}>
-          🔎
+          {loading ? `🔃` : `🔎`}
         </div>
         <input 
           value={currentValue}
           className={styles.autocompleteListInput} 
           disabled={loading}
           onBlur={handleOnBlur}
-          onChange={(e) => onChange(e.target.value)} 
+          onChange={(e) => onChange(e.target.value)}
         />
-        <div className={`${styles.autocompleteListIcon} ${styles.autocompleteListClearIcon}`}>
+        <div
+          onClick={onClear}
+          className={`${styles.autocompleteListClearIcon}`}>
           ✖
         </div>
       </div>
       {
-        isShowSuggestionsList && (<SuggestionsList 
+        (isShowSuggestionsList && !loading && items) && (<SuggestionsList 
           items={items} 
           displayItem={displayItem}
           handleOnSelect={handleOnSelect}

@@ -34,6 +34,14 @@ const SuggestionsList = ({displayItem, items, handleOnSelect, onEsc}) => {
           </div>
         ))
       }
+      {
+        items.length === 0 && (
+          <div 
+            className={`${styles.autocompleteListItem}`} 
+          >
+            No Optios
+          </div>)
+      }
     </div>
   );
 };

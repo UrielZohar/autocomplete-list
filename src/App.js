@@ -1,34 +1,34 @@
 import { useState } from 'react';
+import { useDebounce } from './hooks/useDebounce/useDebounce';
 import { AutocompleteList } from './components/autucompleteList/AutocompleteList';
 import './App.css';
 
 function App() {
-  const [selectedItem, setSelectedItem] = useState({ id: 1, name: 'John' });
+  const [selectedItem, setSelectedItem] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const items = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Jane' },
-    { id: 3, name: 'Jack' },
-    { id: 4, name: 'Jill' },
-    { id: 5, name: 'James' },
-    { id: 6, name: 'Jenny' },
-    { id: 7, name: 'Jesse' },
-    { id: 8, name: 'Jasmine' },
-    { id: 9, name: 'Jared' },
-    { id: 10, name: 'Jocelyn' },
-    { id: 11, name: 'Jasper' },
-    { id: 12, name: 'Jade' },
-    { id: 13, name: 'Javier' },
-    
-  ];
+  const [items, setItems] = useState(null);
+  const fetchItems = useDebounce(async (key) => {
+    try {
+      return await fetch(`https://jsonplaceholder.typicode.com/users?name_like=${key}&_start=0&_limit=20`)
+        .then(response => response.json());
+    } catch (e) {
+      alert('Something went wrong!');
+    }
+  }, 500);
 
   const onSelect = (item) => {
     setSelectedItem(item);
   }
 
-  const onChange = (value) => {
-    
+  const onChange = async (value) => {
+    if (value === '') {
+      setItems(null);
+    } else {
+      setLoading(true);
+      const items = await fetchItems(value);
+      setItems(items);
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,8 +37,9 @@ function App() {
         items={items}
         onSelect={onSelect}  
         onChange={onChange}
+        loading={loading}
         displayItem={(item) => item.name}
-        value={selectedItem.name || ''}  
+        value={selectedItem?.name || ''}  
       />
     </div>
   );
