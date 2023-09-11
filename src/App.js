@@ -5,29 +5,34 @@ import './App.css';
 
 function App() {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(null);
-  const fetchItems = useDebounce(async (key) => {
+  
+  const onSelect = (item) => {
+    console.log(item);
+    setSelectedItem(item);
+  }
+
+  const onChangeWithFetch = useDebounce(async (key) => {
     try {
-      return await fetch(`https://jsonplaceholder.typicode.com/users?name_like=${key}&_start=0&_limit=20`)
+      setLoading(true);
+      const items = await fetch(`https://jsonplaceholder.typicode.com/users?name_like=${key}&_start=0&_limit=20`)
         .then(response => response.json());
+      setItems(items);
+      setLoading(false);
     } catch (e) {
       alert('Something went wrong!');
     }
   }, 500);
 
-  const onSelect = (item) => {
-    setSelectedItem(item);
-  }
-
-  const onChange = async (value) => {
+  const onChange = (value) => {
     if (value === '') {
       setItems(null);
+      setValue('');
     } else {
-      setLoading(true);
-      const items = await fetchItems(value);
-      setItems(items);
-      setLoading(false);
+      setValue(value);
+      onChangeWithFetch(value);
     }
   };
 
@@ -39,7 +44,7 @@ function App() {
         onChange={onChange}
         loading={loading}
         displayItem={(item) => item.name}
-        value={selectedItem?.name || ''}  
+        value={selectedItem?.name || value}  
       />
     </div>
   );

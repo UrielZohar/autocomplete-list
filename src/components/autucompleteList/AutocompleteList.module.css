@@ -6,9 +6,10 @@
   display: flex;
   flex-direction: column;
 
-  &.loading {
-    background-color: var(--disabled-color);
-  }
+}
+
+.autocompleteListLoading {
+  background-color: var(--disabled-color);
 }
 
 .autocompleteListInputSection {
@@ -42,8 +43,8 @@
   padding: 10px;
   box-sizing: border-box;
   border: none;
+}
 
-  &:disabled {
-    background-color: var(--disabled-color);
-  }
+.autocompleteListInputLoading {
+  background-color: var(--disabled-color);
 }

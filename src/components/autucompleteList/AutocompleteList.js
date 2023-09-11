@@ -19,7 +19,7 @@ const AutocompleteList = ({ items, displayItem = displayItemDefault, onChange, l
     setIsShowSuggestionsList(false);
   }, [onSelect, setIsShowSuggestionsList]);
 
-  const handleOnBlur = () => {
+  const handleOnEsc = () => {
     setCurrentValue(value);
     setIsShowSuggestionsList(false);
   };
@@ -31,16 +31,14 @@ const AutocompleteList = ({ items, displayItem = displayItemDefault, onChange, l
   };
 
   return (
-    <div className={`${styles.autocompleteList} ${loading ? 'loading' : ''}`}>
+    <div className={`${styles.autocompleteList} ${loading ? styles.autocompleteListLoading : ''}`}>
       <div className={styles.autocompleteListInputSection}>
         <div className={styles.autocompleteListSearchIcon}>
           {loading ? `🔃` : `🔎`}
         </div>
         <input 
           value={currentValue}
-          className={styles.autocompleteListInput} 
-          disabled={loading}
-          onBlur={handleOnBlur}
+          className={`${styles.autocompleteListInput} ${loading ? styles.autocompleteListInputLoading : ''}`}
           onChange={(e) => onChange(e.target.value)}
         />
         <div
@@ -54,7 +52,7 @@ const AutocompleteList = ({ items, displayItem = displayItemDefault, onChange, l
           items={items} 
           displayItem={displayItem}
           handleOnSelect={handleOnSelect}
-          onEsc={handleOnBlur}
+          onEsc={handleOnEsc}
         />)
       }
     </div>
