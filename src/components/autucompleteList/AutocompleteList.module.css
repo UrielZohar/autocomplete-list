@@ -1,0 +1,36 @@
+
+
+.autocompleteList {
+  --shadow-color: #ccc;
+  display: flex;
+  flex-direction: column;
+}
+
+.autocompleteListInputSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px var(--shadow-color);
+}
+
+.autocompleteListClearIcon {
+  cursor: pointer;
+}
+
+.autocompleteListSearchIcon {
+  cursor: auto;
+  user-select: none;
+}
+
+.autocompleteListInput {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: none;
+}

@@ -1,0 +1,27 @@
+.autocompleteListItemsSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px var(--shadow-color);
+}
+
+.autocompleteListItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0 10px 10px;
+  border-bottom: 1px solid var(--shadow-color);
+  cursor: pointer;
+  box-sizing: border-box;
+
+  :hover {
+    background-color: var(--shadow-color);
+  }
+}
+
+.autocompleteListItemHovered {
+  background-color: var(--shadow-color);
+}
