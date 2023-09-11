@@ -10,7 +10,6 @@ function App() {
   const [items, setItems] = useState(null);
   
   const onSelect = (item) => {
-    console.log(item);
     setSelectedItem(item);
   }
 

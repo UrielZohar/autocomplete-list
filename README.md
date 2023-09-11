@@ -4,6 +4,8 @@
 
 ✅ Debouncer for the input change
 
+✅ [Deploy to Codesanbox](https://codesandbox.io/p/github/UrielZohar/autocomplete-list/master?workspaceId=251720dc-2a8f-4447-83e0-14c1d3414247)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
